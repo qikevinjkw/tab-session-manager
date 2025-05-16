@@ -503,18 +503,6 @@
   "truncateTitleCaptionLabel": {
     "message": "If the session name in the session list extends over more than one line, it is truncated on one line and displayed."
   },
-  "cloudSyncLabel": {
-    "message": "Cloud sync"
-  },
-  "enabledCloudSyncLabel": {
-    "message": "Enable cloud sync (Beta)"
-  },
-  "enabledCloudSyncCaptionLabel": {
-    "message": "Save sessions to Google Drive™ and sync with other computers."
-  },
-  "syncingLabel": {
-    "message": "Syncing"
-  },
   "downloadingLabel": {
     "message": "Downloading"
   },
@@ -527,26 +515,11 @@
   "syncCompletedLabel": {
     "message": "Sync completed."
   },
-  "signInRequiredLabel": {
-    "message": "Requires sign in for cloud sync."
-  },
-  "signInLabel": {
-    "message": "Sign in"
-  },
-  "signOutLabel": {
-    "message": "Sign out"
-  },
   "enabledAutoSyncLabel": {
     "message": "Automatically sync"
   },
-  "enabledAutoSyncCaptionLabel": {
-    "message": "Execute cloud sync when the browser is launched and when the session is saved."
-  },
   "includesAutoSaveToSyncLabel": {
     "message": "Sync auto save sessions"
-  },
-  "includesAutoSaveToSyncCaptionLabel": {
-    "message": "Upload / download auto save sessions in cloud sync."
   },
   "popupLabel": {
     "message": "Popup"
@@ -739,12 +712,6 @@
   },
   "LicenseLabel": {
     "message": "License"
-  },
-  "donationLabel": {
-    "message": "Please make a donation"
-  },
-  "donationCaptionLabel": {
-    "message": "Thank you for using Tab Session Manager.<br>Your support will be a big encouragement, as I continue to develop the add-on.<br>If you like Tab Session Manager, I would be pleased if you could consider donating."
   },
   "amazonTitleLabel": {
     "message": "amazon.co.jp eGift Cards"

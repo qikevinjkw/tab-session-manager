@@ -34,8 +34,6 @@ import onInstalledListener from "./onInstalledListener";
 import onUpdateAvailableListener from "./onUpdateAvailableListener";
 import { onCommandListener } from "./keyboardShortcuts";
 import { openStartupSessions } from "./startup";
-import { signInGoogle, signOutGoogle } from "./cloudAuth";
-import { syncCloud, syncCloudAuto, getSyncStatus } from "./cloudSync";
 import { updateLogLevel, overWriteLogLevel } from "../common/log";
 import { getsearchInfo } from "./search";
 import { recordChange, undo, redo, updateUndoStatus } from "./undo";
@@ -64,7 +62,6 @@ const onStartupListener = async () => {
   if (startupBehavior === "previousSession") openLastSession();
   else if (startupBehavior === "startupSession") openStartupSessions();
   setAutoSave();
-  syncCloudAuto();
   browser.alarms.create("backupSessions", { delayInMinutes: 0.5 });
 };
 
@@ -133,14 +130,6 @@ const onMessageListener = async (request, sender, sendResponse) => {
     case "getCurrentSession":
       const currentSession = await loadCurrentSession("", [], request.property).catch(() => { });
       return currentSession;
-    case "signInGoogle":
-      return await signInGoogle();
-    case "signOutGoogle":
-      return await signOutGoogle();
-    case "syncCloud":
-      return await syncCloud();
-    case "getSyncStatus":
-      return getSyncStatus();
     case "applyDeviceName":
       return await applyDeviceName();
     case "getsearchInfo":

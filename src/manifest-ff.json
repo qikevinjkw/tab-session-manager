@@ -13,13 +13,10 @@
     "storage",
     "unlimitedStorage",
     "tabs",
-    "cookies",
     "downloads",
-    "identity",
     "alarms"
   ],
   "optional_permissions": [
-    "https://www.googleapis.com/*"
   ],
   "options_ui": {
     "page": "options/index.html",

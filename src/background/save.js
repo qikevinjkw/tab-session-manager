@@ -6,7 +6,6 @@ import Sessions from "./sessions.js";
 import { getSettings } from "src/settings/settings";
 import { returnReplaceParameter } from "./replace.js";
 import ignoreUrls from "./ignoreUrls";
-import { pushRemovedQueue, syncCloudAuto } from "./cloudSync.js";
 import { getValidatedTag } from "./tag.js";
 import { queryTabGroups } from "../common/tabGroups";
 import { compressDataUrl } from "../common/compressDataUrl";
@@ -120,7 +119,7 @@ export async function saveSession(session, isSendResponce = true, saveBySync = f
     await Sessions.put(session);
     if (isSendResponce) {
       sendMessage("saveSession", { session: session, saveBySync: saveBySync });
-      if (!saveBySync) syncCloudAuto();
+      
     }
     return session;
   } catch (e) {
@@ -133,7 +132,6 @@ export async function removeSession(id, isSendResponce = true) {
   log.log(logDir, "removeSession()", id, isSendResponce);
   try {
     await Sessions.delete(id);
-    pushRemovedQueue(id);
     if (isSendResponce) sendMessage("deleteSession", { id: id });
   } catch (e) {
     log.error(logDir, "removeSession()", e);

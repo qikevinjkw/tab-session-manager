@@ -28,7 +28,6 @@ import SaveArea from "./SaveArea";
 import Menu from "./Menu";
 import Modal from "./Modal";
 import Error from "./Error";
-import DonationMessage from "./DonationMessage";
 import "../styles/PopupPage.scss";
 import { makeSearchInfo } from "../../common/makeSearchInfo";
 
@@ -154,31 +153,6 @@ export default class PopupPage extends Component {
       });
       setSettings("isShowUpdated", false);
     }
-
-    if (Math.random() < 0.03) {
-      this.openModal(browser.i18n.getMessage("donationLabel"), <DonationMessage />);
-    }
-  };
-
-  calcNeedsSync = sessions => {
-    const shouldShowCloudSync = getSettings("signedInEmail");
-    const lastSyncTime = getSettings("lastSyncTime");
-    const removedQueue = getSettings("removedQueue");
-    const includesAutoSaveToSync = getSettings("includesAutoSaveToSync");
-    if (!shouldShowCloudSync) return false;
-
-    const shouldDelete = removedQueue.length > 0;
-    const shouldUpload = sessions
-      .filter(session => !session.tag.includes("temp"))
-      .filter(
-        session =>
-          includesAutoSaveToSync ||
-          (!session.tag.includes("regular") &&
-            !session.tag.includes("winClose") &&
-            !session.tag.includes("browserExit"))
-      )
-      .some(session => session.lastEditedTime > lastSyncTime);
-    return shouldDelete || shouldUpload;
   };
 
   updateTagList = sessions => {
@@ -225,13 +199,11 @@ export default class PopupPage extends Component {
 
     if (request.isEnd) {
       this.changeFilterValue(this.firstFilterValue);
-      const needsSync = this.calcNeedsSync(this.state.sessions);
-      const syncStatus = await browser.runtime.sendMessage({ message: "getSyncStatus" });
+      
       this.updateTagList(this.state.sessions);
       this.setState({
         isInitSessions: true,
-        needsSync: needsSync,
-        syncStatus: syncStatus
+        needsSync: false,
       });
 
       const searchInfo = await browser.runtime.sendMessage({ message: "getsearchInfo" });
