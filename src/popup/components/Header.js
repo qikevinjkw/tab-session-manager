@@ -29,7 +29,7 @@ export default props => {
 
   return (
     <div id="header">
-      <div className="title">Tab Session Manager</div>
+      <div className="title">BG Session Manager</div>
       <div className="rightButtons">
         
         <button

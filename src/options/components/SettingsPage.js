@@ -4,7 +4,6 @@ import { updateLogLevel, overWriteLogLevel } from "src/common/log";
 import { initSettings, resetAllSettings, handleSettingsChange, exportSettings, importSettings } from "src/settings/settings";
 import defaultSettings from "src/settings/defaultSettings";
 import CategoryContainer from "./CategoryContainer";
-import OptionContainer from "./OptionContainer";
 
 export default class SettingsPage extends Component {
   constructor(props) {

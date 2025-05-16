@@ -1,7 +1,6 @@
 import browser from "webextension-polyfill";
 import log from "loglevel";
 import { getSettings, setSettings } from "src/settings/settings";
-import { initShortcuts } from "./keyboardShortcuts";
 import { init } from "./background";
 import updateOldSessions from "./updateOldSessions";
 import { setSessionStartTime } from "./save";
@@ -21,7 +20,6 @@ export default async details => {
   await init();
   await setSessionStartTime();
   log.info(logDir, "onInstalledListener()", details);
-  initShortcuts();
   const isShowOptionsPage = getSettings("isShowOptionsPageWhenUpdated");
 
   if (isShowOptionsPage) {
