@@ -97,11 +97,7 @@ export async function openSession(session, property = "openInNewWindow") {
   }
 }
 
-const isEnabledOpenerTabId =
-  (browserInfo().name == "Firefox" && browserInfo().version >= 57) ||
-  (browserInfo().name == "Chrome" && browserInfo().version >= 18);
 const isEnabledDiscarded = browserInfo().name == "Firefox" && browserInfo().version >= 63;
-const isEnabledOpenInReaderMode = browserInfo().name == "Firefox" && browserInfo().version >= 58;
 const isEnabledTabGroups = browserInfo().name == "Chrome" && browserInfo().version >= 89;
 const isEnabledWindowTitle = browserInfo().name == "Firefox";
 
@@ -227,27 +223,11 @@ function openTab(tab, currentWindow, isOpenToLastIndex = false) {
       windowId: currentWindow.id
     };
 
-    //cookieStoreId
-    if (browserInfo().name == "Firefox") {
-      createOption.cookieStoreId = tab.cookieStoreId;
-
-      //現在のウィンドウと開かれるタブのプライベート情報に不整合があるときはウィンドウに従う
-      if (currentWindow.incognito) delete createOption.cookieStoreId;
-      if (!currentWindow.incognito && tab.cookieStoreId == "firefox-private")
-        delete createOption.cookieStoreId;
-    }
-
     //タブをindexの最後に開く
     if (isOpenToLastIndex) {
       createOption.index += currentWindow.tabs.length;
     }
 
-    //Tree Style Tab
-    let openDelay = 0;
-    if (getSettings("ifSupportTst") && isEnabledOpenerTabId) {
-      createOption.openerTabId = tabList[tab.openerTabId];
-      openDelay = getSettings("tstDelay");
-    }
 
     //Lazy loading
     if (getSettings("ifLazyLoading")) {
@@ -266,21 +246,6 @@ function openTab(tab, currentWindow, isOpenToLastIndex = false) {
             tab.favIconUrl
           );
         }
-      }
-    }
-
-    //Reader mode
-    if (tab.url.startsWith("about:reader?url=")) {
-      if (getSettings("ifLazyLoading")) {
-        createOption.url = returnReplaceURL(
-          "redirect",
-          tab.title,
-          tab.url,
-          tab.favIconUrl
-        );
-      } else {
-        if (isEnabledOpenInReaderMode) createOption.openInReaderMode = true;
-        createOption.url = decodeURIComponent(tab.url.slice(17));
       }
     }
 
@@ -316,7 +281,6 @@ function openTab(tab, currentWindow, isOpenToLastIndex = false) {
     };
 
     //Tree Style Tabに対応ならdelay
-    if (getSettings("ifSupportTst") && isEnabledOpenerTabId) setTimeout(tryOpen, openDelay);
-    else tryOpen();
+    tryOpen();
   });
 }

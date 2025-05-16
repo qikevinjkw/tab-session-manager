@@ -1,7 +1,6 @@
 import React from "react";
 import browser from "webextension-polyfill";
 import { setSettings, getSettings } from "src/settings/settings";
-import KeyboardShortcutForm from "./KeyboardShortcutForm";
 import "../styles/OptionContainer.scss";
 
 export default props => {
@@ -142,12 +141,6 @@ export default props => {
             onChange={props.onChange}
           />
         </label>
-      );
-      break;
-    case "keyboard-shortcut":
-      formId = id;
-      optionForm = (
-        <KeyboardShortcutForm id={id} shortcut={props.shortcut} defaultValue={props.defaultValue} />
       );
       break;
     case "extra":

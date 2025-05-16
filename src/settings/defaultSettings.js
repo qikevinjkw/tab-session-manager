@@ -35,24 +35,6 @@ export default [
         type: "checkbox",
         default: true
       },
-      {
-        id: "ifSupportTst",
-        title: "ifSupportTstLabel",
-        captions: ["ifSupportTstCaptionLabel"],
-        type: "checkbox",
-        default: false,
-        childElements: [
-          {
-            id: "tstDelay",
-            title: "tstDelayLabel",
-            captions: ["tstDelayCaptionLabel"],
-            type: "number",
-            min: 0,
-            placeholder: 150,
-            default: 150
-          }
-        ]
-      }
     ]
   },
   {

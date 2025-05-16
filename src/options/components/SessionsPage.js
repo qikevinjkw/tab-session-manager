@@ -2,7 +2,6 @@ import React from "react";
 import browser from "webextension-polyfill";
 import OptionContainer from "./OptionContainer";
 import ImportSessionsComponent from "./ImportSessionsComponent";
-import ImportUrlListComponent from "./ImportUrlListComponent";
 
 const handleExportClick = () => {
   browser.runtime.sendMessage({
@@ -25,8 +24,6 @@ export default () => (
     <p className="contentTitle">{browser.i18n.getMessage("sessionsLabel")}</p>
     <hr />
     <ImportSessionsComponent />
-    <hr />
-    <ImportUrlListComponent />
     <hr />
     <OptionContainer
       title="exportLabel"
